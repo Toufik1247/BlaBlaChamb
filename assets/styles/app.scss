@@ -1,0 +1,39 @@
+:root {
+    --white: #977676;
+    --black: #36383F;
+    --gray: #373a3c;
+    --gray2: #596065;
+    --yellow: #f75252;
+    --yellow2: #ce2247;
+    --blue: #3dc1cd;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
+
+
+body,
+html {
+    height: 100%;
+}
+
+body {
+    color: black;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
