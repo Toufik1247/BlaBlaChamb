@@ -3,10 +3,39 @@
     width: 100%;
 }
 
+.homeContent {
+    position: relative;
+    height: 80%;
+    width: 100%;
+}
+
 .home {
     background: url(../img/home.png);
     background-position: center;
     background-size: cover;
     height: 80%;
-    width: 1500px;
+    width: 100%;
+    min-width: 1150px;
+}
+
+.homeForm {
+    position: absolute;
+    top: 30%;
+    right: 50px;
+    transform: translateY(-30%);
+    width: 35%;
+    min-width: 370px;
+    max-width: 450px;
+    height: 70%;
+    background-color: rgba(246, 236, 224, 0.6);
+    border-radius: 15px;
+    z-index: 1;
+}
+
+
+.formTitle {
+    font-weight: 900;
+    font-size: 45px;
+    text-align: center;
+    padding: 40px 0;
 }
