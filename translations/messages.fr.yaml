@@ -1,0 +1,12 @@
+# translations/messages.fr.yaml
+form:
+  agreeTerms: "Accepter les conditions"
+  email: "Email"
+  firstName: "Prénom"
+  lastName: "Nom"
+  phone: "Téléphone"
+  plainPassword: "Mot de passe"
+errors:
+  mustAgreeToTerms: "Vous devez accepter nos conditions."
+  passwordRequired: "Veuillez entrer un mot de passe"
+  passwordLength: "Votre mot de passe doit comporter au moins {{ limit }} caractères"

@@ -11,6 +11,18 @@ class UserFixtures extends AbstractFixture
     // C'est cette méthode qui permet de créer des fixtures
     public function load(ObjectManager $manager)
     {
+        $adminUser = new User();
+        $adminUser->setEmail('said.toufik1@gmail.com');
+        $adminUser->setIsVerified(1);
+        $adminUser->setPassword($this->hasher->hashPassword($adminUser, 'testpass'));
+        $adminUser->setFirstName('Admin');
+        $adminUser->setLastName('Admin');
+        $adminUser->setPhone('0601020304');
+        $adminUser->setCreated($this->faker->dateTime());
+
+        $manager->persist($adminUser);
+
+
         // Une boucle de 10 pour générer 10 produits
         for ($i = 0; $i < 10; $i++) {
 
@@ -18,8 +30,8 @@ class UserFixtures extends AbstractFixture
             $user = new User();
             // $product->setName($this->faker->word());
             $user->setEmail($this->faker->email());
-            $user->setPassword($this->faker->password());
-            $user->setRoles($this->faker->word());
+            $user->setPassword($this->hasher->hashPassword($user, "test"));
+            // $user->setRoles($this->faker->word());
             $user->setFirstName($this->faker->firstName());
             $user->setLastName($this->faker->lastName());
             $user->setPhone($this->faker->phoneNumber());

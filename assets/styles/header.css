@@ -121,10 +121,6 @@
     font-size: 13px;
 }
 
-/* .navlinks a:hover {
-    letter-spacing: 0.15rem;
-} */
-
 .navlinks a {
     position: relative;
     color: var(--black);
@@ -344,7 +340,7 @@
 
     .navlinks a:hover {
         /* letter-spacing: 0.15rem; */
-        color: var(--yellow);
+        /* color: white; */
         font-weight: 700;
     }
 
@@ -373,18 +369,6 @@
         width: 100%;
     }
 
-    .navlinks li:first-child a {
-        color: white;
-    }
-
-    .navlinks li:last-child a {
-        color: white;
-    }
-
-    .navlinks li:last-child a::after {
-        width: 0px !important;
-    }
-
     .burgerMenu {
         display: none;
     }
@@ -410,9 +394,15 @@
     }
 
     .loginButton a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 0px 20px;
         margin: auto;
         font-weight: 600;
+        color: white;
+        height: 100%;
+        width: 100%;
     }
 
 
@@ -428,9 +418,15 @@
     }
 
     .signInButton a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 0px 20px;
         margin: auto;
         font-weight: 600;
+        color: white;
+        height: 100%;
+        width: 100%;
     }
 
 
