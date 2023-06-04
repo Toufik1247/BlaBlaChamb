@@ -45,7 +45,7 @@ class DashboardController extends AbstractController
             return $this->redirectToRoute('app_dashboard', ['id' => $car->getId()]);
         }
 
-        return $this->render('dahsboard/car/addCar.html.twig', [
+        return $this->render('dashboard/car/addCar.html.twig', [
             'controller_name' => 'DashboardController',
             'page_title' => $pageTitle,
             'addCarForm' => $addCarForm
@@ -85,7 +85,7 @@ class DashboardController extends AbstractController
             return $this->redirectToRoute('app_dashboard');
         }
 
-        return $this->render('dahsboard/car/editCar.html.twig', [
+        return $this->render('dashboard/car/editCar.html.twig', [
             'controller_name' => 'DashboardController',
             'page_title' => $pageTitle,
             'editCarForm' => $editCarForm->createView()
