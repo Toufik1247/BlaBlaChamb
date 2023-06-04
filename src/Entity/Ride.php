@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RideRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Ride
 {
     #[ORM\Id]
@@ -36,9 +37,9 @@ class Ride
 
     #[ORM\ManyToOne(inversedBy: 'rides')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $driver = null;
+    private ?User $driver = null;
 
-    #[ORM\ManyToMany(targetEntity: rule::class, inversedBy: 'rides')]
+    #[ORM\ManyToMany(targetEntity: Rule::class, inversedBy: 'rides')]
     private Collection $rules;
 
     public function __construct()
@@ -121,6 +122,12 @@ class Ride
         $this->created = $created;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedValue(): void
+    {
+        $this->created = new \DateTime();
     }
 
     public function getDriver(): ?user

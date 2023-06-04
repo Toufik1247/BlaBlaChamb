@@ -13,7 +13,6 @@ class UserFixtures extends AbstractFixture
     {
         $adminUser = new User();
         $adminUser->setEmail('said.toufik1@gmail.com');
-        $adminUser->setIsVerified(1);
         $adminUser->setPassword($this->hasher->hashPassword($adminUser, 'testpass'));
         $adminUser->setFirstName('Admin');
         $adminUser->setLastName('Admin');

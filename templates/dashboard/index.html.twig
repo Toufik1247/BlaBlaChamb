@@ -1,44 +1,190 @@
-{# {% extends 'base.html.twig' %} #}
+{% extends 'base.html.twig' %}
 
-{% block title %}Hello DashboardController!
+{% block title %}
+	Dashboard |
+	{{app.user.firstName}}
+	{{app.user.lastName}}
 {% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
+	<div class="container py-5">
+		<div
+			class="row">
+			<!-- User Info Card -->
+			<div class="col-12 col-md-6 mb-4">
+				<div class="card shadow">
+					<div class="card-header bg-primary text-white">
+						<h5 class="card-title mb-0">
+							<i class="fas fa-user-circle"></i>
+							{{app.user.firstName}}
+							{{app.user.lastName}}
+						</h5>
+					</div>
+					<div class="card-body">
+						<p class="card-text mb-2">
+							<i class="fas fa-envelope"></i>
+							<strong>Email:
+							</strong>
+							{{app.user.email}}
+						</p>
+						<p class="card-text">
+							<i class="fas fa-phone"></i>
+							<strong>Téléphone :
+							</strong>
+							{{app.user.phone}}
+						</p>
+						{# <a href="{{ path('app_ride') }}" class="btn btn-primary mt-3"> #}
+						<i class="fas fa-edit"></i>
+						Editer votre profil
+					</a>
+				</div>
+			</div>
+		</div>
 
-	<div class="example-wrapper">
-		<h1>Hello
-			{{ controller_name }}! ✅</h1>
 
-		This friendly message is coming from:
-		<ul>
-			<li>Your controller at
-				<code>
-					<a href="{{ '/home/touftafu/Documents/Dev/Formation/symfony/projet_test/src/Controller/DashboardController.php'|file_link(0) }}">src/Controller/DashboardController.php</a>
-				</code>
-			</li>
-			<li>Your template at
-				<code>
-					<a href="{{ '/home/touftafu/Documents/Dev/Formation/symfony/projet_test/templates/dashboard/index.html.twig'|file_link(0) }}">templates/dashboard/index.html.twig</a>
-				</code>
-			</li>
-		</ul>
+		<!-- Cars Card -->
+		<div class="col-12 col-md-6 mb-4">
+			<div class="card shadow">
+				<div class="card-header bg-primary text-white">
+					<h5 class="card-title mb-0">
+						<i class="fas fa-car"></i>
+						Vos Véhicules
+					</h5>
+				</div>
+				<div class="card-body">
+					{% for car in app.user.cars %}
+						<p class="card-text">
+							<strong>Brand:
+							</strong>
+							{{car.brand}}<br>
+							<strong>Model:
+							</strong>
+							{{car.model}}<br>
+							<strong>Seats:
+							</strong>
+							{{car.seats}}<br>
+						</p>
+						{% if not loop.last %}
+							<hr>
+						{% endif %}
+					{% endfor %}
+					{# <a href="{{ path('app_ride') }}" class="btn btn-primary mt-3"> #}
+					<i class="fas fa-plus"></i>
+					Ajouter un véhicule
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-12">
+		<div class="card shadow mb-4">
+			<div class="card-header bg-primary text-white">
+				<h5 class="card-title">
+					<i class="fas fa-list"></i>
+					Vos Règles
+				</h5>
+			</div>
+			<div class="card-body">
+				{% for rule in app.user.rules %}
+					<div class="rule-item d-flex justify-content-between align-items-center mb-2">
+						<div class="rule-details">
+							<i class="fas fa-check"></i>
+							{{ rule.name }}
+							-
+							{{ rule.description }}
+						</div>
+						<div class="rule-actions">
+							<a href="{{ path('app_ride', { 'id': rule.id }) }}" class="btn btn-warning btn-sm">
+								<i class="fas fa-edit"></i>
+								Modifier
+							</a>
+							<a href="{{ path('app_ride', { 'id': rule.id }) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette règle ?')">
+								<i class="fas fa-trash"></i>
+								Supprimer
+							</a>
+						</div>
+					</div>
+				{% else %}
+					<p>Vous n'avez pas encore de règles définies.</p>
+				{% endfor %}
+			</div>
+		</div>
 	</div>
 
-	<div class="mb-3">
-		You are logged in as
-		{{ app.user.userIdentifier }},
-		<a href="{{ path('app_logout') }}">Logout</a>
+	<!-- Rides Card -->
+	<div class="col-12">
+		<div class="card shadow mb-4">
+			<div class="card-header bg-primary text-white">
+				<h5 class="card-title mb-0">
+					<i class="fas fa-route"></i>
+					Vos Trajets
+				</h5>
+			</div>
+			<div class="card-body">
+				<div class="cardContainer">
+					{% for ride in app.user.rides %}
+						<div class="card card4 shadow-sm m-2">
+							<div class="card-header">
+								Trajet #{{ ride.id }}
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">
+									<i class="fas fa-road"></i>
+									De
+									{{ ride.departure }}
+									à
+									{{ ride.destination }}
+								</h5>
+								<p class="card-text">
+									<strong>
+										<i class="fas fa-user"></i>
+										Conducteur :</strong>
+									{{ ride.driver.firstName }}
+									{{ ride.driver.lastName | first | upper }}.
+								</p>
+								<p class="card-text">
+									<strong>
+										<i class="fas fa-clock"></i>
+										Date de départ :</strong>
+									{{ ride.date | date('d/m/Y H:i') }}
+								</p>
+								<p class="card-text">
+									<strong>
+										<i class="fas fa-chair"></i>
+										Nombre de places disponibles :</strong>
+									{{ ride.seats }}
+								</p>
+								<p class="card-text">
+									<strong>
+										<i class="fas fa-euro-sign"></i>
+										Prix :</strong>
+									{{ ride.price }}€
+								</p>
+								<p class="card-text">
+									<strong>
+										<i class="fas fa-list"></i>
+										Règles :</strong>
+									<ul>
+										{% for rule in ride.rules %}
+											<li>{{ rule.name }}
+												:
+												{{ rule.description }}</li>
+										{% endfor %}
+									</ul>
+								</p>
+							</div>
+							<div class="card-footer text-muted">
+								<a href="{{ path('app_ride', {'id': ride.id}) }}" class="btn btn-primary">
+									<i class="fas fa-eye"></i>
+									Voir les détails</a>
+							</div>
+						</div>
+					{% else %}
+						<p class="text-center">You have no rides at the moment.
+							<a href="{{ path('app_add_ride') }}" class="text-primary">Add a ride?</a>
+						</p>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
 	</div>
-{% endblock %}
+</div></div>{% endblock %}

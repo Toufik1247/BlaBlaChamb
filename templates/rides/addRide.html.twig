@@ -1,8 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block pageTitle %}
-	{{page_title}}
-{% endblock %}
+{% block pageTitle %}{% endblock %}
 
 {% block body %}
-	{{ form(addRideForm) }}{% endblock %}
+	<div class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<h1 class="mb-4">Proposer un trajet</h1>
+				{{ form_start(addRideForm, {'attr': {'class': 'row g-3'}}) }}
+				<div class="col-md-6">
+					{{ form_label(addRideForm.departure, 'Départ', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(addRideForm.departure, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_label(addRideForm.destination, 'Destination', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(addRideForm.destination, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_label(addRideForm.seats, 'Sièges', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(addRideForm.seats, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_label(addRideForm.price, 'Prix', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(addRideForm.price, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_label(addRideForm.date, 'Date', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(addRideForm.date, {'attr': {'class': 'form-control', 'id': 'datepicker'}}) }}
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						{{ form_label(addRideForm.rules, 'Règles', {'label_attr': {'class': 'form-label'}}) }}
+						<div class="row">
+							{% for rule in addRideForm.rules %}
+								<div class="col-md-4">
+									<div class="form-check">
+										{{ form_widget(rule, {'attr': {'class': 'form-check-input'}}) }}
+										<label class="form-check-label" for="{{ rule.vars.id }}">
+											<i class="fas fa-rule-icon"></i>
+											<strong>{{ rule.vars.label }}</strong>
+										</label>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+						{{ form_errors(addRideForm.rules) }}
+					</div>
+				</div>
+
+
+				<div class="col-12">
+					<button type="submit" class="btn btn-primary">
+						<i class="fas fa-paper-plane"></i>
+						Soumettre</button>
+				</div>
+				<div id="rule-list"></div>
+
+				{{ form_end(addRideForm) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,5 +1,119 @@
 {% extends 'base.html.twig' %}
 
-{% block pageTitle %}
-	{{page_title}}
+{% block body %}
+	<style>
+		body,
+		html {
+			height: 100%;
+		}
+		.trajetContainer {
+			height: 100%;
+			display: flex;
+		}
+		.filtreContainer {
+			width: 40%;
+			height: 100%;
+			overflow: auto;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+		}
+		.cardContainer {
+			width: 60%;
+			height: 100%;
+			overflow: auto;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.card1 {
+			position: fixed;
+			top: 33%;
+			align-self: center;
+			width: 30vw;
+		}
+	</style>
+
+	<div class="container py-5">
+		<div class="row">
+			<div class="col-12">
+				<div class="trajetContainer">
+					<div class="filtreContainer">
+						<div class="card card1 mb-4">
+							<div class="card-body">
+								<h5 class="card-title">Filtrer les trajets</h5>
+								<!-- TODO: Insérer ici le formulaire de filtre -->
+								<a href="#" class="btn btn-primary mt-3">
+									<i class="fas fa-filter"></i>
+									Appliquer les filtres</a>
+							</div>
+						</div>
+					</div>
+					<div class="cardContainer">
+						{% for ride in rides %}
+							<div class="card shadow card4 m-4" style="width: 35rem;">
+								<div class="card-header bg-primary text-white">
+									<i class="fas fa-road"></i>
+									Trajet #{{ ride.id }}
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">
+										De
+										{{ ride.departure }}
+										à
+										{{ ride.destination }}
+									</h5>
+									<p class="card-text">
+										<strong>
+											<i class="fas fa-user"></i>
+											Conducteur :</strong>
+										{{ ride.driver.firstName }}
+										{{ ride.driver.lastName | first | upper }}.
+									</p>
+									<p class="card-text">
+										<strong>
+											<i class="fas fa-calendar-alt"></i>
+											Date de départ :</strong>
+										{{ ride.date | date('d/m/Y H:i') }}
+									</p>
+									<p class="card-text">
+										<strong>
+											<i class="fas fa-chair"></i>
+											Nombre de places disponibles :</strong>
+										{{ ride.seats }}
+									</p>
+									<p class="card-text">
+										<strong>
+											<i class="fas fa-euro-sign"></i>
+											Prix :</strong>
+										{{ ride.price }}€
+									</p>
+									<p class="card-text">
+										<strong>
+											<i class="fas fa-list-ul"></i>
+											Règles :</strong>
+										<ul>
+											{% for rule in ride.rules %}
+												<li>{{ rule.name }}
+													:
+													{{ rule.description }}</li>
+											{% endfor %}
+										</ul>
+									</p>
+								</div>
+								<div class="card-footer text-muted">
+									<a href="{{ path('app_ride', {'id': ride.id}) }}" class="btn btn-primary">
+										<i class="fas fa-eye"></i>
+										Voir les détails</a>
+								</div>
+							</div>
+						{% else %}
+							<p class="text-center">Aucun trajet à afficher pour le moment.</p>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 {% endblock %}

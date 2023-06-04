@@ -3,9 +3,11 @@
         "@babel/core": "^7.17.0",
         "@babel/preset-env": "^7.16.0",
         "@hotwired/stimulus": "^3.0.0",
+        "@popperjs/core": "^2.11.8",
         "@symfony/stimulus-bridge": "^3.2.0",
         "@symfony/webpack-encore": "^4.0.0",
         "core-js": "^3.23.0",
+        "jquery": "^3.7.0",
         "node-sass": "^9.0.0",
         "regenerator-runtime": "^0.13.9",
         "sass-loader": "^13.2.2",
@@ -22,6 +24,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "bootstrap": "^5.2.3"
+        "bootstrap": "^5.2.3",
+        "flatpickr": "^4.6.13"
     }
 }

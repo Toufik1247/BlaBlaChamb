@@ -1,0 +1,20 @@
+<form class="z-999 dropdown-menu p-4" method="post" action="{{ path('app_login') }}">
+	<div class="mb-3">
+		<label for="exampleDropdownFormEmail2" class="form-label">Email address</label>
+		<input type="email" class="form-control" id="exampleDropdownFormEmail2" name="email" placeholder="email@example.com" value="{{ last_username }}">
+	</div>
+	<div class="mb-3">
+		<label for="exampleDropdownFormPassword2" class="form-label">Password</label>
+		<input type="password" class="form-control" id="exampleDropdownFormPassword2" name="password" placeholder="Password">
+	</div>
+	{# <div class="mb-3">
+				<div class="form-check">
+					<input type="checkbox" class="form-check-input" id="dropdownCheck2" name="_remember_me">
+					<label class="form-check-label" for="dropdownCheck2">
+						Remember me
+					</label>
+				</div>
+			</div> #}
+	<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+	<button type="submit" class="btn btn-success">Sign in</button>
+</form>

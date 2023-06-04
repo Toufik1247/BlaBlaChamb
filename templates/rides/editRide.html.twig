@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block body %}
+	<div class="d-flex align-items-center justify-content-center container mt-4 h-100">
+		<div class="card" style="width: 35rem;">
+			<div class="card-header">
+				{{ page_title }}
+			</div>
+			<div class="card-body">
+				{{ form_start(editRideForm) }}
+				<div class="mb-3">
+					{{ form_label(editRideForm.departure, 'Départ', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(editRideForm.departure, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="mb-3">
+					{{ form_label(editRideForm.destination, 'Destination', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(editRideForm.destination, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="mb-3">
+					{{ form_label(editRideForm.seats, 'Sièges', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(editRideForm.seats, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="mb-3">
+					{{ form_label(editRideForm.price, 'Prix', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(editRideForm.price, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="mb-3">
+					{{ form_label(editRideForm.date, 'Date', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(editRideForm.date, {'attr': {'class': 'form-control', 'id': 'datepicker'}}) }}
+				</div>
+				<div class="mb-3">
+
+					{{ form_label(editRideForm.rules, 'Règles', {'label_attr': {'class': 'form-label'}}) }}
+					{% for rule in editRideForm.rules %}
+						<div>
+							{{ form_row(rule.name) }}
+							{{ form_row(rule.description) }}
+						</div>
+					{% endfor %}
+				</div>
+				<button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+				{{ form_end(editRideForm) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

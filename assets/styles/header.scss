@@ -94,6 +94,17 @@
 
 }
 
+.nav {
+    overflow: visible;
+}
+
+.dropdown {
+    position: relative;
+    z-index: 9999;
+}
+
+
+
 .navlinks {
     display: flex;
     flex-direction: column;
@@ -121,30 +132,29 @@
     font-size: 13px;
 }
 
-.navlinks a {
-    position: relative;
-    color: var(--black);
-    /* transition: letter-spacing 0.2s ease-in-out; */
-    width: 100%;
-    text-align: center;
-    background-color: transparent;
-}
+// .navlinks a {
+//     position: relative;
+//     color: var(--black);
+//     width: 100%;
+//     text-align: center;
+//     /* background-color: transparent; */
+// }
 
-.navlinks a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0%;
-    height: 2px;
-    background-color: var(--yellow);
-    letter-spacing: 0.15rem;
-    transition: width 0.3s ease-in-out;
-}
+// .navlinks a::after {
+//     content: "";
+//     position: absolute;
+//     left: 0;
+//     bottom: -5px;
+//     width: 0%;
+//     height: 2px;
+//     background-color: var(--yellow);
+//     letter-spacing: 0.15rem;
+//     transition: width 0.3s ease-in-out;
+// }
 
-.navlinks a:hover::after {
-    width: 100%;
-}
+// .navlinks a:hover::after {
+//     width: 100%;
+// }
 
 .burgerMenu {
     cursor: pointer;
@@ -319,6 +329,17 @@
         align-items: center;
         justify-content: center;
         margin-top: 0;
+
+        ul {
+            a {
+                width: 200px;
+            }
+
+            a:hover {
+                border-bottom: unset;
+                transition: none !important;
+            }
+        }
     }
 
     .navlinks {
@@ -338,22 +359,18 @@
         width: auto;
     }
 
-    .navlinks a:hover {
-        /* letter-spacing: 0.15rem; */
-        /* color: white; */
+    .navlinks>li>a:hover {
         font-weight: 700;
     }
 
-    .navlinks a {
+    .navlinks>li>a {
         position: relative;
         color: var(--white);
-        /* transition: letter-spacing 0.2s ease-in-out; */
         width: 100%;
         text-align: center;
-        background-color: transparent;
     }
 
-    .navlinks a::after {
+    .navlinks>li>a::after {
         content: "";
         position: absolute;
         left: 0;
@@ -361,11 +378,10 @@
         width: 0%;
         height: 2px;
         background-color: var(--yellow);
-        /* letter-spacing: 0.15rem; */
         transition: width 0.3s ease-in-out;
     }
 
-    .navlinks a:hover::after {
+    .navlinks>li>a:hover::after {
         width: 100%;
     }
 

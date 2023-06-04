@@ -1,34 +1,49 @@
-<header class="header">
-	<div class="subHeader">
-		<a href="{{path('app')}}" class="logo">LOGO</a>
-		<input class="side-menu" type="checkbox" id="side-menu">
-		<label class="burgerMenu" for="side-menu">
-			<span class="burgerMenu-line"></span>
-		</label>
-		<nav class="nav">
-			<ul class="navlinks">
-				{% if not app.user %}
-					<li class="loginButton">
-						<a href="{{path('app_register')}}">INSCRIPTION</a>
+<header>
+	<nav class="navbar d-flex justify-content-between navbar-expand-lg navbar-light bg-light">
+		<div class="container d-flex justify-content-between">
+			<a class="navbar-brand" href="{{path('app')}}">LOGO</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					{% if not app.user %}
+						<li class="nav-item mr-4">
+							<a href="{{path('app_register')}}" class="nav-link">
+								<i class="fas fa-user-plus"></i>
+								INSCRIPTION</a>
+						</li>
+					{% endif %}
+					<li class="nav-item mr-4">
+						<a class="nav-link" href="{{path('app_rides')}}">
+							<i class="fas fa-eye"></i>
+							VOIR LES ANNONCES</a>
 					</li>
-				{% endif %}
-				<li>
-					<a href="{{path('app_ride')}}">VOIR LES ANNONCES</a>
-				</li>
-				<li>
-					<a href="{{path('app_add_ride')}}">PUBLIEZ VOTRE ANNONCE</a>
-				</li>
-				{% if not app.user %}
-					<li class="signInButton">
-						<a href="{{path('app_login')}}">SE CONNECTER</a>
+					<li class="nav-item mr-4">
+						<a class="nav-link" href="{{path('app_add_ride')}}">
+							<i class="fas fa-plus"></i>
+							PUBLIEZ VOTRE ANNONCE</a>
 					</li>
-				{% else %}
-					<li>
-						<a href="{{path('app_logout')}}">SE DECONNECTER</a>
-					</li>
-				{% endif %}
-			</ul>
-
-		</nav>
-	</div>
+					{% if not app.user %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('app_login')}}">
+								<i class="fas fa-sign-in-alt"></i>
+								SE CONNECTER</a>
+						</li>
+					{% else %}
+						<li class="nav-item mr-4">
+							<a class="nav-link" href="{{path('app_dashboard')}}">
+								<i class="fas fa-user"></i>
+								MON PROFIL</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('app_logout')}}">
+								<i class="fas fa-sign-out-alt"></i>
+								SE DECONNECTER</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav>
 </header>
