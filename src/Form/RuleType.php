@@ -5,9 +5,9 @@ namespace App\Form;
 use App\Entity\Rule;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class RuleType extends AbstractType
 {
@@ -17,22 +17,12 @@ class RuleType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom de la règle',
                 'attr' => ['class' => 'form-control'],
-                'required' => false, // rend ce champ non obligatoire
+                'required' => true,
             ])
             ->add('description', TextType::class, [
                 'label' => 'Description',
                 'attr' => ['class' => 'form-control'],
-                'required' => false, // rend ce champ non obligatoire
-            ])
-            ->add('rules', EntityType::class, [
-                'class' => Rule::class,
-                'choice_label' => function (Rule $rule) {
-                    return sprintf('%s - %s', $rule->getName(), $rule->getDescription());
-                },
-                'label' => 'Règles',
-                'attr' => ['class' => 'form-control'],
-                'multiple' => true,
-                'expanded' => true
+                'required' => true, 
             ])
         ;
     }

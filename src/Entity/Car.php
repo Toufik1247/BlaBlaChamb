@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Car
 {
     #[ORM\Id]
@@ -28,7 +29,7 @@ class Car
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $owner = null;
+    private ?User $owner = null;
 
     public function getId(): ?int
     {
@@ -83,12 +84,18 @@ class Car
         return $this;
     }
 
-    public function getOwner(): ?user
+    #[ORM\PrePersist]
+    public function setCreatedValue(): void
+    {
+        $this->created = new \DateTime();
+    }
+
+    public function getOwner(): ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(?user $owner): self
+    public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
 

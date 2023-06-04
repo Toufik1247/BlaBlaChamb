@@ -6,7 +6,7 @@ use App\Entity\Ride;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Rule;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -27,8 +27,13 @@ class RidesType extends AbstractType
             ->add('destination')
             ->add('seats')
             ->add('price')
-            ->add('date', DateType::class, [
-                'widget' => 'single_text'
+            ->add('date', DateTimeType::class, [
+                'date_widget' => 'single_text',
+                'time_widget' => 'choice',
+                'input' => 'datetime',
+                'with_seconds' => false,
+                'minutes' => range(0, 59, 15),
+                'hours' => range(1, 24),
             ])
             ->add('rules', EntityType::class, [
                 'class' => Rule::class,

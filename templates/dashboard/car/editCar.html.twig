@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block body %}
+	<div class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<h1 class="mb-4">Ajouter un véhicule</h1>
+				{{ form_start(editCarForm, {'attr': {'class': 'row g-3'}}) }}
+				<div class="col-md-6">
+					{{ form_label(editCarForm.brand, 'Marque', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(editCarForm.brand, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_label(editCarForm.model, 'Modèle', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(editCarForm.model, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_label(editCarForm.seats, 'Nombre de places', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(editCarForm.seats, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+
+
+			<div class="col-12">
+				<button type="submit" class="btn btn-primary">
+					<i class="fas fa-paper-plane"></i>
+					Soumettre</button>
+			</div>
+			<div id="rule-list"></div>
+
+			{{ form_end(editCarForm) }}
+		</div>
+	</div>
+</div>{% endblock %}

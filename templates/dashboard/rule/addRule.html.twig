@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block body %}
+	<div class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<h1 class="mb-4">Ajouter une règle</h1>
+				{{ form_start(addRuleForm, {'attr': {'class': 'row g-3'}}) }}
+				<div class="col-md-6">
+					{{ form_label(addRuleForm.name, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(addRuleForm.name, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_label(addRuleForm.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+					{{ form_widget(addRuleForm.description, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+
+
+			<div class="col-12">
+				<button type="submit" class="btn btn-primary">
+					<i class="fas fa-paper-plane"></i>
+					Soumettre</button>
+			</div>
+			<div id="rule-list"></div>
+
+			{{ form_end(addRuleForm) }}
+		</div>
+	</div>
+</div>{% endblock %}

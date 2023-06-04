@@ -60,7 +60,8 @@ class RidesController extends AbstractController
         $addRideForm = $this->createForm(RidesType::class, $ride);
         $addRideForm->handleRequest($request);
 
-        if ($addRideForm->isSubmitted() && $addRideForm->isValid()) {
+        if ($addRideForm->isSubmitted() && !$addRideForm->isValid()) {
+
             $ride->setDriver($this->getUser());
 
             $entityManager->persist($ride);
