@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "bootstrap": "^5.2.3",
-        "flatpickr": "^4.6.13"
+        "flatpickr": "^4.6.13",
+        "jquery-ui-dist": "^1.13.2"
     }
 }

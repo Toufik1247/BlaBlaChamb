@@ -39,28 +39,32 @@ class RideRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Ride[] Returns an array of Ride objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findByParameters($departure, $destination, $date, $seats)
+    {
+        $startOfDay = clone $date;
+        $startOfDay->setTime(0, 0, 0);
 
-//    public function findOneBySomeField($value): ?Ride
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $endOfDay = clone $date;
+        $endOfDay->setTime(23, 59, 59);
+
+
+        $departure = '%' . $departure . '%';
+        $destination = '%' . $destination . '%';
+
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.departure LIKE :departure')
+            ->andWhere('r.destination LIKE :destination')
+            ->andWhere('r.date BETWEEN :startOfDay AND :endOfDay')
+            ->andWhere('r.seats >= :seats')
+            ->setParameter('departure', $departure)
+            ->setParameter('destination', $destination)
+            ->setParameter('startOfDay', $startOfDay)
+            ->setParameter('endOfDay', $endOfDay)
+            ->setParameter('seats', $seats)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
 }

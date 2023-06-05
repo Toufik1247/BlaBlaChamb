@@ -8,54 +8,53 @@
 		<div class="container">
 			<h1 class="display-1 text-white fw-bold">Trouvez votre covoiturage</h1>
 			<p class="lead text-white fw-medium fs-4">Rejoignez notre communauté pour des voyages plus écologiques et économiques.</p>
-			<div class="mt-5">
-				<a class="btn btn-lg bg-primary text-white" href="{{ path('app_register') }}" role="button">Inscrivez-vous maintenant</a>
-			</div>
+			{% if not app.user %}
+				<div class="mt-5">
+					<a class="btn btn-lg bg-primary text-white" href="{{ path('app_register') }}" role="button">Inscrivez-vous maintenant</a>
+				</div>
+			{% endif %}
 			<div class="row mt-5">
 				<div class="col-lg-5 mx-auto">
-					<form>
-						<div class="form-row">
-							<div class="col">
-								<div class="input-group mb-3">
-									<span class="input-group-text" id="basic-addon1">
-										<i class="fas fa-map-marker-alt"></i>
-									</span>
-									<input type="text" class="form-control" placeholder="Départ" aria-label="Départ" aria-describedby="basic-addon1">
-								</div>
-							</div>
-							<div class="col">
-								<div class="input-group mb-3">
-									<span class="input-group-text" id="basic-addon2">
-										<i class="fas fa-map-marker-alt"></i>
-									</span>
-									<input type="text" class="form-control" placeholder="Destination" aria-label="Destination" aria-describedby="basic-addon2">
-								</div>
+					{{ form_start(form) }}
+					<div class="form-row">
+						<div class="col">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="basic-addon1">
+									<i class="fas fa-map-marker-alt"></i>
+								</span>
+								{{ form_widget(form.departure, {'attr': {'class': 'form-control', 'placeholder': 'Départ', 'aria-label': 'Départ', 'aria-describedby': 'basic-addon1'}}) }}
 							</div>
 						</div>
-						<div class="form-row">
-							<div class="col">
-								<div class="input-group mb-3">
-									<span class="input-group-text" id="basic-addon3">
-										<i class="fas fa-calendar-alt"></i>
-									</span>
-									<input type="date" class="form-control" placeholder="Date" aria-label="Date" aria-describedby="basic-addon3">
-								</div>
-							</div>
-							<div class="col">
-								<div class="input-group mb-5">
-									<span class="input-group-text" id="basic-addon4">
-										<i class="fas fa-users"></i>
-									</span>
-									<input type="number" class="form-control" placeholder="Nombre de passagers" aria-label="Nombre de passagers" aria-describedby="basic-addon4">
-								</div>
+						<div class="col">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="basic-addon2">
+									<i class="fas fa-map-marker-alt"></i>
+								</span>
+								{{ form_widget(form.destination, {'attr': {'class': 'form-control', 'placeholder': 'Destination', 'aria-label': 'Destination', 'aria-describedby': 'basic-addon2'}}) }}
 							</div>
 						</div>
-						<button type="submit" class="btn btn-lg bg-primary text-white">Trouver un trajet</button>
-					</form>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="basic-addon3">
+									<i class="fas fa-calendar-alt"></i>
+								</span>
+								{{ form_widget(form.date, {'attr': {'class': 'form-control', 'placeholder': 'Date', 'aria-label': 'Date', 'aria-describedby': 'basic-addon3'}}) }}
+							</div>
+						</div>
+						<div class="col">
+							<div class="input-group mb-5">
+								<span class="input-group-text" id="basic-addon4">
+									<i class="fas fa-users"></i>
+								</span>
+								{{ form_widget(form.seats, {'attr': {'class': 'form-control', 'placeholder': 'Nombre de passagers', 'aria-label': 'Nombre de passagers', 'aria-describedby': 'basic-addon4'}}) }}
+							</div>
+						</div>
+					</div>
+					{{ form_end(form) }}
 				</div>
 			</div>
 		</div>
 	</div>
-
-
 {% endblock %}
