@@ -8,6 +8,7 @@ BlaBlaChamb est une application de covoiturage conçue pour mettre en relation d
 - Publication de trajets
 - Système d'évaluation des utilisateurs (à venir)
 - Système de messagerie pour la communication entre les utilisateurs (à venir)
+- Système pour filtrer les trajets (à venir)
 
 ## Prérequis
 
@@ -63,3 +64,20 @@ php bin/console d:f:l
 ```
 symfony serve
 ```
+
+7. Lancer le serveur Symfony:
+
+```
+symfony serve
+```
+
+8. Exécuter le script NPM "watch" pour surveiller les modifications de vos fichiers et recompiler automatiquement le code si nécessaire :
+
+```
+npm run watch
+```
+
+9. Compte par défaut
+
+- admin@admin.com
+- admin

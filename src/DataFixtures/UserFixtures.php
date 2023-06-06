@@ -12,8 +12,8 @@ class UserFixtures extends AbstractFixture
     public function load(ObjectManager $manager)
     {
         $adminUser = new User();
-        $adminUser->setEmail('said.toufik1@gmail.com');
-        $adminUser->setPassword($this->hasher->hashPassword($adminUser, 'testpass'));
+        $adminUser->setEmail('admin@admin.com');
+        $adminUser->setPassword($this->hasher->hashPassword($adminUser, 'admin'));
         $adminUser->setFirstName('Admin');
         $adminUser->setLastName('Admin');
         $adminUser->setPhone('0601020304');
