@@ -4,13 +4,11 @@ import './styles/registerForm.scss';
 import './styles/rides.scss';
 import './styles/header.css';
 
-
-require('bootstrap');
-import './bootstrap';
+import * as bootstrap from 'bootstrap';
 import '@popperjs/core';
 import './js/hello';
 require('jquery-ui-dist/jquery-ui');
-
+window.bootstrap = bootstrap;
 const $ = require('jquery');
 
 $(document).ready(function () {
@@ -70,3 +68,11 @@ $(document).ready(function () {
     }
 
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach((tooltipTriggerEl) => {
+        return new window.bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+

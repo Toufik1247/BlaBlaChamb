@@ -3,102 +3,106 @@
 {% block pageTitle %}{% endblock %}
 
 {% block body %}
-	<div class="container my-5">
-		<div class="row justify-content-center">
-			<div class="col-md-8">
-				<h1 class="mb-4 text-center">
-					<i class="fas fa-road"></i>
-					Proposer un trajet
-				</h1>
-				{{ form_start(addRideForm, {'attr': {'class': 'row g-3'}}) }}
-				<div class="col-md-6">
-					<div class="input-group mb-3">
-						<span class="input-group-text bg-primary text-white">
-							<i class="fas fa-map-marker-alt"></i>
-						</span>
-						{{ form_widget(addRideForm.departure, {'attr': {'class': 'form-control', 'placeholder': 'Départ'}}) }}
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="input-group mb-3">
-						<span class="input-group-text bg-primary text-white">
-							<i class="fas fa-map-marker-alt"></i>
-						</span>
-						{{ form_widget(addRideForm.destination, {'attr': {'class': 'form-control', 'placeholder': 'Destination'}}) }}
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="input-group mb-3">
-						<span class="input-group-text bg-primary text-white">
-							<i class="fas fa-user-friends"></i>
-						</span>
-						{{ form_widget(addRideForm.seats, {'attr': {'class': 'form-control', 'placeholder': 'Nombre de places'}}) }}
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="input-group mb-3">
-						<span class="input-group-text bg-primary text-white">
-							<i class="fas fa-euro-sign"></i>
-						</span>
-						{{ form_widget(addRideForm.price, {'attr': {'class': 'form-control', 'placeholder': 'Prix'}}) }}
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="input-group mb-3">
-						<span class="input-group-text bg-primary text-white">
-							<i class="fas fa-calendar-alt"></i>
-						</span>
-						{{ form_widget(addRideForm.date.date, {'attr': {'class': 'form-control', 'placeholder': 'Date'}}) }}
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="input-group mb-3">
-						<span class="input-group-text bg-primary text-white">
-							<i class="fas fa-clock"></i>
-						</span>
-						{{ form_widget(addRideForm.date.time, {'attr': {'class': 'form-control', 'placeholder': 'Heure'}}) }}
-					</div>
-				</div>
-
-				<div class="col-md-12">
-					<div class="card border-info mb-3">
-						<div class="card-header bg-primary text-white">
-							{{ form_label(addRideForm.rules, 'Règles', {'label_attr': {'class': 'form-label'}}) }}
+	<div class="container-fluid bg-light py-5 h-100 d-flex align-items-center justify-content-center">
+		<div class="container">
+			<div class="card justify-content-center border-0 shadow rounded">
+				<div class="card-body p-5">
+					<h1 class="mb-4 text-center text-primary">
+						<i class="fas fa-road"></i>
+						Proposer un trajet
+					</h1>
+					{{ form_start(addRideForm, {'attr': {'class': 'g-3'}}) }}
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-map-marker-alt"></i>
+							</span>
+							{{ form_widget(addRideForm.departure, {'attr': {'class': 'form-control', 'placeholder': 'Départ'}}) }}
 						</div>
-						<div class="card-body">
-							<div class="row d-flex justify-content-center">
-								{% if addRideForm.rules|length == 0 %}
-									<p class="text-center">Aucune règle n'a été créée pour le moment.</p>
-								{% else %}
-									{% for rule in addRideForm.rules %}
-										<div class="col-md-4">
-											<div class="form-check">
-												{{ form_widget(rule, {'attr': {'class': 'form-check-input'}}) }}
-												<label class="form-check-label" for="{{ rule.vars.id }}">
-													<strong>{{ rule.vars.label }}</strong>
-												</label>
-											</div>
-										</div>
-									{% endfor %}
-								{% endif %}
+					</div>
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-map-marker-alt"></i>
+							</span>
+							{{ form_widget(addRideForm.destination, {'attr': {'class': 'form-control', 'placeholder': 'Destination'}}) }}
+						</div>
+					</div>
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-user-friends"></i>
+							</span>
+							{{ form_widget(addRideForm.seats, {'attr': {'class': 'form-control', 'placeholder': 'Nombre de places'}}) }}
+						</div>
+					</div>
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-euro-sign"></i>
+							</span>
+							{{ form_widget(addRideForm.price, {'attr': {'class': 'form-control', 'placeholder': 'Prix'}}) }}
+						</div>
+					</div>
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-calendar-alt"></i>
+							</span>
+							{{ form_widget(addRideForm.date.date, {'attr': {'class': 'form-control', 'placeholder': 'Date'}}) }}
+						</div>
+					</div>
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-clock"></i>
+							</span>
+							{{ form_widget(addRideForm.date.time, {'attr': {'class': 'form-control', 'placeholder': 'Heure'}}) }}
+						</div>
+					</div>
+
+					<div class="md-12">
+						<div class="card border-info mb-3">
+							<div class="card-header bg-primary text-white d-flex align-items-center">
+								{{ form_label(addRideForm.rules, 'Règles', {'label_attr': {'class': 'form-label m-1'}}) }}
+								<i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Vous pouvez gérer vos règles dans votre profil"></i>
 							</div>
-							<div class="row">
-								<div class="col-md-12">
-									{{ form_errors(addRideForm.rules) }}
+
+							<div class="card-body">
+								<div class="row d-flex justify-content-center">
+									{% if addRideForm.rules|length == 0 %}
+										<p class="text-center">Aucune règle n'a été créée pour le moment.</p>
+									{% else %}
+										{% for rule in addRideForm.rules %}
+											<div class="col-md-4">
+												<div class="form-check">
+													{{ form_widget(rule, {'attr': {'class': 'form-check-input'}}) }}
+													<label class="form-check-label" for="{{ rule.vars.id }}">
+														<strong>{{ rule.vars.label }}</strong>
+													</label>
+												</div>
+											</div>
+										{% endfor %}
+									{% endif %}
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										{{ form_errors(addRideForm.rules) }}
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<div class="col-12 d-flex justify-content-center">
-					<button type="submit" class="btn btn-primary mt-3">
-						<i class="fas fa-paper-plane"></i>
-						Soumettre
-					</button>
+					<div class="col-12 d-flex justify-content-center">
+						<button type="submit" class="btn btn-primary mt-3">
+							<i class="fas fa-paper-plane"></i>
+							Soumettre
+						</button>
+					</div>
+					<div id="rule-list"></div>
+					{{ form_end(addRideForm, {'render_rest': false}) }}
 				</div>
-				<div id="rule-list"></div>
-				{{ form_end(addRideForm, {'render_rest': false}) }}
 			</div>
 		</div>
 	</div>

@@ -42,7 +42,7 @@ class DashboardController extends AbstractController
             $entityManager->persist($car);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_dashboard', ['id' => $car->getId()]);
+            return $this->redirectToRoute('app_dashboard');
         }
 
         return $this->render('dashboard/car/addCar.html.twig', [
