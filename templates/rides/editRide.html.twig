@@ -3,45 +3,106 @@
 {% block pageTitle %}{% endblock %}
 
 {% block body %}
-	<div class="d-flex align-items-center justify-content-center container mt-4 h-100">
-		<div class="card" style="width: 35rem;">
-			<div class="card-header">
-				{{ page_title }}
-			</div>
-			<div class="card-body">
-				{{ form_start(editRideForm) }}
-				<div class="mb-3">
-					{{ form_label(editRideForm.departure, 'Départ', {'label_attr': {'class': 'form-label'}}) }}
-					{{ form_widget(editRideForm.departure, {'attr': {'class': 'form-control'}}) }}
-				</div>
-				<div class="mb-3">
-					{{ form_label(editRideForm.destination, 'Destination', {'label_attr': {'class': 'form-label'}}) }}
-					{{ form_widget(editRideForm.destination, {'attr': {'class': 'form-control'}}) }}
-				</div>
-				<div class="mb-3">
-					{{ form_label(editRideForm.seats, 'Sièges', {'label_attr': {'class': 'form-label'}}) }}
-					{{ form_widget(editRideForm.seats, {'attr': {'class': 'form-control'}}) }}
-				</div>
-				<div class="mb-3">
-					{{ form_label(editRideForm.price, 'Prix', {'label_attr': {'class': 'form-label'}}) }}
-					{{ form_widget(editRideForm.price, {'attr': {'class': 'form-control'}}) }}
-				</div>
-				<div class="mb-3">
-					{{ form_label(editRideForm.date, 'Date', {'label_attr': {'class': 'form-label'}}) }}
-					{{ form_widget(editRideForm.date, {'attr': {'class': 'form-control', 'id': 'datepicker'}}) }}
-				</div>
-				<div class="mb-3">
-
-					{{ form_label(editRideForm.rules, 'Règles', {'label_attr': {'class': 'form-label'}}) }}
-					{% for rule in editRideForm.rules %}
-						<div>
-							{{ form_row(rule.name) }}
-							{{ form_row(rule.description) }}
+	<div class="container-fluid bg-light py-5 h-100 d-flex align-items-center justify-content-center">
+		<div class="container">
+			<div class="card justify-content-center border-0 shadow rounded">
+				<div class="card-body p-5">
+					<h1 class="mb-4 text-center text-primary">
+						<i class="fas fa-road"></i>
+						Modifier votre trajet
+					</h1>
+					{{ form_start(editRideForm, {'attr': {'class': 'g-3'}}) }}
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-map-marker-alt"></i>
+							</span>
+							{{ form_widget(editRideForm.departure, {'attr': {'class': 'form-control', 'placeholder': 'Départ'}}) }}
 						</div>
-					{% endfor %}
+					</div>
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-map-marker-alt"></i>
+							</span>
+							{{ form_widget(editRideForm.destination, {'attr': {'class': 'form-control', 'placeholder': 'Destination'}}) }}
+						</div>
+					</div>
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-user-friends"></i>
+							</span>
+							{{ form_widget(editRideForm.seats, {'attr': {'class': 'form-control', 'placeholder': 'Nombre de places'}}) }}
+						</div>
+					</div>
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-euro-sign"></i>
+							</span>
+							{{ form_widget(editRideForm.price, {'attr': {'class': 'form-control', 'placeholder': 'Prix'}}) }}
+						</div>
+					</div>
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-calendar-alt"></i>
+							</span>
+							{{ form_widget(editRideForm.date.date, {'attr': {'class': 'form-control', 'placeholder': 'Date'}}) }}
+						</div>
+					</div>
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-clock"></i>
+							</span>
+							{{ form_widget(editRideForm.date.time, {'attr': {'class': 'form-control', 'placeholder': 'Heure'}}) }}
+						</div>
+					</div>
+
+					<div class="md-12">
+						<div class="card border-info mb-3">
+							<div class="card-header bg-primary text-white d-flex align-items-center">
+								{{ form_label(editRideForm.rules, 'Règles', {'label_attr': {'class': 'form-label m-1'}}) }}
+								<i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Vous pouvez gérer vos règles dans votre profil"></i>
+							</div>
+
+							<div class="card-body">
+								<div class="row d-flex justify-content-center">
+									{% if editRideForm.rules|length == 0 %}
+										<p class="text-center">Aucune règle n'a été créée pour le moment.</p>
+									{% else %}
+										{% for rule in editRideForm.rules %}
+											<div class="col-md-4">
+												<div class="form-check">
+													{{ form_widget(rule, {'attr': {'class': 'form-check-input'}}) }}
+													<label class="form-check-label" for="{{ rule.vars.id }}">
+														<strong>{{ rule.vars.label }}</strong>
+													</label>
+												</div>
+											</div>
+										{% endfor %}
+									{% endif %}
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										{{ form_errors(editRideForm.rules) }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 d-flex justify-content-center">
+						<button type="submit" class="btn btn-primary mt-3">
+							<i class="fas fa-paper-plane"></i>
+							Soumettre
+						</button>
+					</div>
+					<div id="rule-list"></div>
+					{{ form_end(editRideForm) }}
 				</div>
-				<button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-				{{ form_end(editRideForm) }}
 			</div>
 		</div>
 	</div>

@@ -66,7 +66,6 @@ class RidesController extends AbstractController
             $entityManager->persist($ride);
             $entityManager->flush();
 
-            // Redirect to some page after successfully saving the ride
             return $this->redirectToRoute('app_ride', ['id' => $ride->getId()]);
         }
 
@@ -113,7 +112,6 @@ class RidesController extends AbstractController
         if ($editRideForm->isSubmitted() && $editRideForm->isValid()) {
             $entityManager->flush();
 
-            // Rediriger vers la page des détails du trajet modifié
             return $this->redirectToRoute('app_ride', ['id' => $ride->getId()]);
         }
 

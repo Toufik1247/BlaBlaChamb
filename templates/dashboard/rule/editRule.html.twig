@@ -3,30 +3,41 @@
 {% block pageTitle %}{% endblock %}
 
 {% block body %}
-	<div class="container my-5">
-		<div class="row justify-content-center">
-			<div class="col-md-8">
-				<h1 class="mb-4">Ajouter un véhicule</h1>
-				{{ form_start(editRuleForm, {'attr': {'class': 'row g-3'}}) }}
-				<div class="col-md-6">
-					{{ form_label(editRuleForm.name, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
-					{{ form_widget(editRuleForm.name, {'attr': {'class': 'form-control'}}) }}
-				</div>
-				<div class="col-md-6">
-					{{ form_label(editRuleForm.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
-					{{ form_widget(editRuleForm.description, {'attr': {'class': 'form-control'}}) }}
+	<div class="container-fluid bg-light py-5 h-100 d-flex align-items-center justify-content-center">
+		<div class="container">
+			<div class="card justify-content-center border-0 shadow rounded">
+				<div class="card-body p-5">
+					<h1 class="mb-4 text-center text-primary">
+						<i class="fas fa-car"></i>
+						Modifier votre règle
+					</h1>
+					{{ form_start(editRuleForm, {'attr': {'class': 'g-3'}}) }}
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-car"></i>
+							</span>
+							{{ form_widget(editRuleForm.name, {'attr': {'class': 'form-control', 'placeholder': 'Marque'}}) }}
+						</div>
+					</div>
+					<div class="md-6">
+						<div class="input-group mb-3">
+							<span class="input-group-text bg-primary text-white">
+								<i class="fas fa-car"></i>
+							</span>
+							{{ form_widget(editRuleForm.description, {'attr': {'class': 'form-control', 'placeholder': 'Modèle'}}) }}
+						</div>
+					</div>
+					<div class="col-12 d-flex justify-content-center">
+						<button type="submit" class="btn btn-primary mt-3">
+							<i class="fas fa-paper-plane"></i>
+							Soumettre
+						</button>
+					</div>
+					<div id="rule-list"></div>
+					{{ form_end(editRuleForm) }}
 				</div>
 			</div>
-
-
-			<div class="col-12">
-				<button type="submit" class="btn btn-primary">
-					<i class="fas fa-paper-plane"></i>
-					Soumettre</button>
-			</div>
-			<div id="rule-list"></div>
-
-			{{ form_end(editRuleForm) }}
 		</div>
 	</div>
-</div>{% endblock %}
+{% endblock %}

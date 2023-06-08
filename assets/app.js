@@ -24,7 +24,6 @@ $(document).ready(function () {
         timer2 = setTimeout(fetchCities, 300, $(this).val(), 'find_ride_destination');
     });
 
-    // Ici, remplacez 'add_ride_departure' et 'add_ride_destination' par les vrais IDs des champs d'entrée dans le formulaire 'addRideForm'.
     $('#rides_departure').on('input', function () {
         clearTimeout(timer3);
         timer3 = setTimeout(fetchCities, 300, $(this).val(), 'rides_departure');
@@ -36,7 +35,7 @@ $(document).ready(function () {
     });
 
     function fetchCities(query, elementId) {
-        if (query.length < 3) return;
+        if (query.length < 1) return;
 
         $.ajax({
             url: `https://geo.api.gouv.fr/communes?nom=${query}&boost=population`,
@@ -49,13 +48,10 @@ $(document).ready(function () {
                 $('#' + elementId).autocomplete({
                     source: results,
                     open: function () {
-                        // Ajouter des classes à la liste de suggestions
                         $('.ui-autocomplete').addClass('list-group border');
 
-                        // Ajouter des classes à chaque élément de la liste
                         $('.ui-menu-item').addClass('list-group-item');
 
-                        // Modifier la largeur de la liste pour qu'elle corresponde à la largeur du champ d'entrée
                         $('.ui-autocomplete').css('width', $('#' + elementId).width() + 'px');
                     }
 

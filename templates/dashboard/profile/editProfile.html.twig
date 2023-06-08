@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid registerFormContainer bg-light py-5 h-100 d-flex align-items-center">
+		<div class="container">
+			<div class="card border-0 shadow rounded">
+				<div class="card-body p-5">
+					<h1 class="mb-4 text-center text-primary">
+						<i class="fas fa-user-plus"></i>
+						Inscription</h1>
+
+					{{ form_start(editUserForm, {'attr': {'class': 'g-3'}}) }}
+
+					<div class="mb-3">
+						<i class="fa fa-envelope form-icon"></i>
+						<label for="{{ editUserForm.email.vars.id }}" class="form-label">Email</label>
+						{{ form_widget(editUserForm.email, {'attr': {'class': 'form-control'}}) }}
+					</div>
+
+					<div class="mb-3">
+						<i class="fa fa-key form-icon"></i>
+						<label for="{{ editUserForm.plainPassword.first.vars.id }}" class="form-label">Mot de passe</label>
+						{{ form_widget(editUserForm.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+					</div>
+
+					<div class="mb-3">
+						<i class="fa fa-key form-icon"></i>
+						<label for="{{ editUserForm.plainPassword.second.vars.id }}" class="form-label">Confirmez le mot de passe</label>
+						{{ form_widget(editUserForm.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+					</div>
+
+					<div class="mb-3">
+						<i class="fa fa-user form-icon"></i>
+						<label for="{{ editUserForm.vars.id }}" class="form-label">Prénom</label>
+						{{ form_widget(editUserForm.first_name, {'attr': {'class': 'form-control'}}) }}
+					</div>
+
+					<div class="mb-3">
+						<i class="fa fa-user form-icon"></i>
+						<label for="{{ editUserForm.last_name.vars.id }}" class="form-label">Nom</label>
+						{{ form_widget(editUserForm.last_name, {'attr': {'class': 'form-control'}}) }}
+					</div>
+
+					<div class="mb-3">
+						<i class="fa fa-phone form-icon"></i>
+						<label for="{{ editUserForm.phone.vars.id }}" class="form-label">Téléphone</label>
+						{{ form_widget(editUserForm.phone, {'attr': {'class': 'form-control'}}) }}
+					</div>
+
+					<div class="col-12 d-flex flex-column justify-content-center mt-5">
+						<div class="d-flex justify-content-center">
+							<button type="submit" class="btn btn-primary mt-3">
+								<i class="fas fa-paper-plane"></i>
+								Modifier
+							</button>
+						</div>
+					</div>
+
+
+					{{ form_end(editUserForm) }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

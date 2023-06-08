@@ -7,52 +7,80 @@
 {% block body %}
 	<div class="container h-100">
 		<div class="row h-100 justify-content-center align-items-center">
-			<div class="col-6">
-				<div class="card">
+			<div class="col-12">
+				<div class="card shadow mb-4">
 					<div class="card-header bg-primary text-white">
-						Trajet #{{ ride.id }}
+						<h5 class="card-title mb-0">
+							<i class="fas fa-route"></i>
+							Trajet #{{ ride.id }}
+						</h5>
 					</div>
 					<div class="card-body">
-						<h5 class="card-title">De
-							{{ ride.departure }}
-							à
-							{{ ride.destination }}</h5>
-						<p class="card-text">
-							<strong>Conducteur :</strong>
-							{{ ride.driver.firstName }}
-							{{ ride.driver.lastName | first | upper }}.
-						</p>
-						<p class="card-text">
-							<strong>Date de départ :</strong>
-							{{ ride.date | date('d/m/Y H:i') }}
-						</p>
-						<p class="card-text">
-							<strong>Nombre de places disponibles :</strong>
-							{{ ride.seats }}
-						</p>
-						<p class="card-text">
-							<strong>Prix :</strong>
-							{{ ride.price }}€
-						</p>
-						<p class="card-text">
-							<strong>Règles :</strong>
-							<ul>
-								{% for rule in ride.rules %}
-									<li>{{ rule.name }}
-										:
-										{{ rule.description }}</li>
-								{% endfor %}
-							</ul>
-						</p>
+						<div class="card card4 shadow-sm m-2">
+							<div class="card-header">
+								<h5 class="card-title">
+									<i class="fas fa-road"></i>
+									De
+									{{ ride.departure }}
+									à
+									{{ ride.destination }}
+								</h5>
+							</div>
+							<div class="card-body d-flex justify-content-center flex-column">
+								<p class="card-text">
+									<strong>
+										<i class="fas fa-user"></i>
+										Conducteur :</strong>
+									{{ ride.driver.firstName }}
+									{{ ride.driver.lastName | first | upper }}.
+								</p>
+								<p class="card-text">
+									<strong>
+										<i class="fas fa-clock"></i>
+										Date de départ :</strong>
+									{{ ride.date | date('d/m/Y H:i') }}
+								</p>
+								<p class="card-text">
+									<strong>
+										<i class="fas fa-chair"></i>
+										Nombre de places disponibles :</strong>
+									{{ ride.seats }}
+								</p>
+								<p class="card-text">
+									<strong>
+										<i class="fas fa-euro-sign"></i>
+										Prix :</strong>
+									{{ ride.price }}€
+								</p>
+								<p class="card-text">
+									<strong>
+										<i class="fas fa-list"></i>
+										Règles :</strong>
+									<ul>
+										{% for rule in ride.rules %}
+											<li>{{ rule.name }}
+												:
+												{{ rule.description }}</li>
+										{% endfor %}
+									</ul>
+								</p>
+							</div>
+							<div class="card-footer text-muted text-center">
+								{% if not app.user or app.user.id != ride.driver.id %}
+									<a href="{{ path('app_ride_delete', {'id': ride.id}) }}" class="btn btn-danger">
+										<i class="fas fa-ticket-alt"></i>
+										Réserver</a>
+								{% elseif app.user.id == ride.driver.id %}
+									<a href="{{ path('app_ride_edit', {'id': ride.id}) }}" class="btn btn-warning">
+										<i class="fas fa-edit"></i>
+										Modifier</a>
+									<a href="{{ path('app_ride_delete', {'id': ride.id}) }}" class="btn btn-danger">
+										<i class="fas fa-trash-alt"></i>
+										Supprimer</a>
+								{% endif %}
+							</div>
+						</div>
 					</div>
-					{% if not app.user or app.user.id != ride.driver.id %}
-						<a href="{{ path('app_ride_delete', {'id': ride.id}) }}" class="btn btn-danger">Réserver</a>
-					{% elseif app.user.id == ride.driver.id %}
-						<a href="{{ path('app_ride_edit', {'id': ride.id}) }}" class="btn btn-warning">Modifier</a>
-						<a href="{{ path('app_ride_delete', {'id': ride.id}) }}" class="btn btn-danger">Supprimer</a>
-					{% endif %}
-
-
 				</div>
 			</div>
 		</div>
