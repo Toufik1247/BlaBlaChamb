@@ -1,7 +1,17 @@
-.ridesListContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
+.roadsContainer {
+    height: 85vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8)), url(../img/road2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.addRideContainer {
+    height: 85vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8)), url(../img/road3.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.footer {
+    height: 7.5vh;
 }

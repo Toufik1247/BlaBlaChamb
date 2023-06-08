@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Rule;
 use App\Form\AddCarType;
 use App\Form\RuleType;
-use App\Form\editProfileFormType;
+use App\Form\editProfileForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -177,7 +177,7 @@ class DashboardController extends AbstractController
         $user = $this->security->getUser();
 
         $pageTitle = 'Modifier Votre Profil' . $user->getId();
-        $editUserForm = $this->createForm(editProfileFormType::class, $user);
+        $editUserForm = $this->createForm(editProfileForm::class, $user);
         $editUserForm->handleRequest($request);
 
         if ($editUserForm->isSubmitted() && $editUserForm->isValid()) {

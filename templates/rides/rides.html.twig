@@ -1,68 +1,71 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<style>
-		body,
-		html {
-			height: 100%;
-		}
-		.trajetContainer {
-			height: 100%;
-			display: flex;
-		}
-		.filtreContainer {
-			width: 40%;
-			height: 100%;
-			overflow: auto;
-			position: relative;
-			display: flex;
-			flex-direction: column;
-		}
-		.cardContainer {
-			width: 60%;
-			height: 100%;
-			overflow: auto;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-		.card1 {
-			position: fixed;
-			top: 33%;
-			align-self: center;
-			width: 30vw;
-		}
-	</style>
-
-	<div class="container py-5">
-		<div class="row">
-			<div class="col-12">
-				<div class="trajetContainer">
-					<div class="filtreContainer">
-						<div class="card card1 mb-4">
-							<div class="card-body">
-								<h5 class="card-title">Filtrer les trajets</h5>
-								<!-- TODO: Insérer ici le formulaire de filtre -->
-								<a href="#" class="btn btn-primary mt-3">
-									<i class="fas fa-filter"></i>
-									Appliquer les filtres</a>
+	<div class="container-fluid roadsContainer">
+		<div class="row h-100 d-flex align-items-center justify-content-center overflow-auto">
+			<div class="col-lg-4">
+				<div class="card shadow mb-4 animate__animated animate__fadeInLeft">
+					<div class="card-header bg-primary text-white">
+						<h5 class="card-title mb-0 d-flex align-items-center">
+							<i class="fas fa-filter me-2"></i>
+							Filtre des trajets
+						</h5>
+					</div>
+					<div class="card-body">
+						{{ form_start(filter_form, {'attr': {'class': 'form-horizontal'}}) }}
+						<div class="mb-3">
+							<div class="input-group">
+								<span class="input-group-text">
+									<i class="fas fa-road"></i>
+								</span>
+								{{ form_widget(filter_form.departure, {'attr': {'class': 'form-control', 'placeholder': 'Départ'}}) }}
 							</div>
 						</div>
+						<div class="mb-3">
+							<div class="input-group">
+								<span class="input-group-text">
+									<i class="fas fa-map-marker-alt"></i>
+								</span>
+								{{ form_widget(filter_form.destination, {'attr': {'class': 'form-control', 'placeholder': 'Destination'}}) }}
+							</div>
+						</div>
+						<div class="mb-3">
+							<div class="input-group">
+								<span class="input-group-text">
+									<i class="fas fa-users"></i>
+								</span>
+								{{ form_widget(filter_form.minSeats, {'attr': {'class': 'form-control', 'placeholder': 'Nombre minimum de places'}}) }}
+							</div>
+						</div>
+						<div class="mb-3">
+							<div class="input-group">
+								<span class="input-group-text">
+									<i class="fas fa-euro-sign"></i>
+								</span>
+								{{ form_widget(filter_form.maxPrice, {'attr': {'class': 'form-control', 'placeholder': 'Prix maximum'}}) }}
+							</div>
+						</div>
+						<button class="btn btn-primary mt-3" type="submit">
+							<i class="fas fa-search me-2"></i>
+							Appliquer les filtres
+						</button>
+						{{ form_end(filter_form) }}
 					</div>
-					<div class="cardContainer">
-						{% for ride in rides %}
-							<div class="card shadow card4 m-4" style="width: 35rem;">
-								<div class="card-header bg-primary text-white">
-									<i class="fas fa-road"></i>
-									Trajet #{{ ride.id }}
-								</div>
-								<div class="card-body">
+				</div>
+				<div class="row">
+					{% for ride in rides %}
+						<div class="col-lg-12  data-aos=" fade-up"">
+							<div class="card card4 shadow-sm m-2 animate__animated animate__zoomIn">
+								<div class="card-header">
 									<h5 class="card-title">
+										<i class="fas fa-road"></i>
 										De
 										{{ ride.departure }}
 										à
 										{{ ride.destination }}
 									</h5>
+								</div>
+								<div class="card-body d-flex justify-content-center flex-column">
 									<p class="card-text">
 										<strong>
 											<i class="fas fa-user"></i>
@@ -72,7 +75,7 @@
 									</p>
 									<p class="card-text">
 										<strong>
-											<i class="fas fa-calendar-alt"></i>
+											<i class="fas fa-clock"></i>
 											Date de départ :</strong>
 										{{ ride.date | date('d/m/Y H:i') }}
 									</p>
@@ -88,32 +91,37 @@
 											Prix :</strong>
 										{{ ride.price }}€
 									</p>
-									<p class="card-text">
-										<strong>
-											<i class="fas fa-list-ul"></i>
-											Règles :</strong>
-										<ul>
-											{% for rule in ride.rules %}
-												<li>{{ rule.name }}
-													:
-													{{ rule.description }}</li>
-											{% endfor %}
-										</ul>
-									</p>
+									{# <p class="card-text">
+																			<strong>
+																				<i class="fas fa-list"></i>
+																				Règles :</strong>
+																			<ul>
+																				{% for rule in ride.rules %}
+																					<li>{{ rule.name }}
+																						:
+																						{{ rule.description }}</li>
+																				{% endfor %}
+																			</ul>
+																		</p> #}
 								</div>
-								<div class="card-footer text-muted">
+								<div class="card-footer text-muted text-center">
 									<a href="{{ path('app_ride', {'id': ride.id}) }}" class="btn btn-primary">
 										<i class="fas fa-eye"></i>
 										Voir les détails</a>
 								</div>
 							</div>
-						{% else %}
-							<p class="text-center">Aucun trajet à afficher pour le moment.</p>
-						{% endfor %}
-					</div>
+						</div>
+					{% else %}
+						<div class="col-12 text-center animate__animated animate__bounceIn">
+							<p>Aucun trajet à afficher pour le moment.</p>
+						</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
 	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js">
+		AOS.init()
+	</script>
 
 {% endblock %}

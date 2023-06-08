@@ -11,25 +11,59 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Ride;
+use App\Entity\RideFilter;
+use App\Form\RideFilterType;
 
 
 #[Route('rides')]
 class RidesController extends AbstractController
 {
     #[Route('/', name: 'app_rides')]
-    public function rides(EntityManagerInterface $entityManager): Response
+    public function rides(EntityManagerInterface $entityManager, Request $request): Response
     {
+        $rideFilter = new RideFilter();
+        $filterForm = $this->createForm(RideFilterType::class, $rideFilter);
+        $filterForm->handleRequest($request);
+
         $ridesrepository = $entityManager->getRepository(Ride::class);
-        $rides = $ridesrepository->findAll();
+
+        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+            $filterData = $filterForm->getData();
+
+            $qb = $ridesrepository->createQueryBuilder('r');
+
+            if ($filterData->getDeparture() !== null) {
+                $qb->andWhere('r.departure LIKE :departure')
+                    ->setParameter('departure', '%' . $filterData->getDeparture() . '%');
+            }
+            if ($filterData->getDestination() !== null) {
+                $qb->andWhere('r.destination LIKE :destination')
+                    ->setParameter('destination', '%' . $filterData->getDestination() . '%');
+            }
+            if ($filterData->getMinSeats() !== null) {
+                $qb->andWhere('r.seats >= :minSeats')
+                    ->setParameter('minSeats', $filterData->getMinSeats());
+            }
+            if ($filterData->getMaxPrice() !== null) {
+                $qb->andWhere('r.price <= :maxPrice')
+                    ->setParameter('maxPrice', $filterData->getMaxPrice());
+            }
+
+            $rides = $qb->getQuery()->getResult();
+        } else {
+            $rides = $ridesrepository->findAll();
+        }
 
         $pageTitle = 'Toutes les offres';
 
         return $this->render('rides/rides.html.twig', [
             'controller_name' => 'RidesController',
             'page_title' => $pageTitle,
-            'rides' => $rides
+            'rides' => $rides,
+            'filter_form' => $filterForm->createView(),
         ]);
     }
+
 
     #[Route('/details/{id}', name: 'app_ride')]
     public function ride(RideRepository $rideRepository, int $id): Response

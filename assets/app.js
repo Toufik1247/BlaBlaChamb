@@ -72,3 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+const minSeatsSlider = document.querySelector('#{{ filter_form.minSeats.vars.id }}');
+const minSeatsValue = document.querySelector('#minSeatsValue');
+
+// Update the current slider value (each time you drag the slider handle)
+minSeatsSlider.oninput = function () {
+    minSeatsValue.textContent = 'Vous avez choisi : ' + this.value + ' places';
+}
+
