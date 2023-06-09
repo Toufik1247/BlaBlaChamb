@@ -12,7 +12,7 @@ window.bootstrap = bootstrap;
 const $ = require('jquery');
 
 $(document).ready(function () {
-    let timer1, timer2, timer3, timer4;
+    let timer1, timer2, timer3, timer4, timer5, timer6;
 
     $('#find_ride_departure').on('input', function () {
         clearTimeout(timer1);
@@ -33,6 +33,19 @@ $(document).ready(function () {
         clearTimeout(timer4);
         timer4 = setTimeout(fetchCities, 300, $(this).val(), 'rides_destination');
     });
+
+    $('#ride_filter_departure').on('input', function () {
+        clearTimeout(timer5);
+        timer4 = setTimeout(fetchCities, 300, $(this).val(), 'ride_filter_departure');
+    });
+
+    $('#ride_filter_destination').on('input', function () {
+        clearTimeout(timer5);
+        timer4 = setTimeout(fetchCities, 300, $(this).val(), 'ride_filter_destination');
+    });
+
+
+
 
     function fetchCities(query, elementId) {
         if (query.length < 1) return;
@@ -71,12 +84,4 @@ document.addEventListener('DOMContentLoaded', () => {
         return new window.bootstrap.Tooltip(tooltipTriggerEl);
     });
 });
-
-const minSeatsSlider = document.querySelector('#{{ filter_form.minSeats.vars.id }}');
-const minSeatsValue = document.querySelector('#minSeatsValue');
-
-// Update the current slider value (each time you drag the slider handle)
-minSeatsSlider.oninput = function () {
-    minSeatsValue.textContent = 'Vous avez choisi : ' + this.value + ' places';
-}
 

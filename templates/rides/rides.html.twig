@@ -3,7 +3,7 @@
 {% block body %}
 	<div class="container-fluid roadsContainer">
 		<div class="row h-100 d-flex align-items-center justify-content-center overflow-auto">
-			<div class="col-lg-4">
+			<div class="col-lg-4 py-4">
 				<div class="card shadow mb-4 animate__animated animate__fadeInLeft">
 					<div class="card-header bg-primary text-white">
 						<h5 class="card-title mb-0 d-flex align-items-center">
@@ -92,17 +92,17 @@
 										{{ ride.price }}€
 									</p>
 									{# <p class="card-text">
-																			<strong>
-																				<i class="fas fa-list"></i>
-																				Règles :</strong>
-																			<ul>
-																				{% for rule in ride.rules %}
-																					<li>{{ rule.name }}
-																						:
-																						{{ rule.description }}</li>
-																				{% endfor %}
-																			</ul>
-																		</p> #}
+																																														<strong>
+																																															<i class="fas fa-list"></i>
+																																															Règles :</strong>
+																																														<ul>
+																																															{% for rule in ride.rules %}
+																																																<li>{{ rule.name }}
+																																																	:
+																																																	{{ rule.description }}</li>
+																																															{% endfor %}
+																																														</ul>
+																																													</p> #}
 								</div>
 								<div class="card-footer text-muted text-center">
 									<a href="{{ path('app_ride', {'id': ride.id}) }}" class="btn btn-primary">
