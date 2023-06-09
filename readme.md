@@ -2,6 +2,10 @@
 
 BlaBlaChamb est une application de covoiturage conçue pour mettre en relation des conducteurs avec des places vides dans leur voiture avec des passagers recherchant un trajet. C'est une application basée sur le framework Symfony et utilise Composer et NPM pour la gestion des dépendances.
 
+## Live Version
+
+[BlaBlaChamb](http://vps-a67a6a1e.vps.ovh.net/)
+
 ## Fonctionnalités
 
 - Recherche de trajets

@@ -2,7 +2,7 @@ import './styles/app.scss';
 import './styles/home.scss';
 import './styles/registerForm.scss';
 import './styles/rides.scss';
-import './styles/header.css';
+import './styles/header.scss';
 
 import * as bootstrap from 'bootstrap';
 import '@popperjs/core';
