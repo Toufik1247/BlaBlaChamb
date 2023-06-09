@@ -40,7 +40,7 @@ $(document).ready(function () {
     });
 
     $('#ride_filter_destination').on('input', function () {
-        clearTimeout(timer5);
+        clearTimeout(timer6);
         timer4 = setTimeout(fetchCities, 300, $(this).val(), 'ride_filter_destination');
     });
 
