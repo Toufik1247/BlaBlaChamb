@@ -4,7 +4,7 @@ BlaBlaChamb est une application de covoiturage conçue pour mettre en relation d
 
 ## Live Version
 
-[BlaBlaChamb](http://vps-a67a6a1e.vps.ovh.net/)
+[BlaBlaChamb](https://blablachamb.2screens.dev/)
 
 ## Fonctionnalités
 
